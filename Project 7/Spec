@@ -1,0 +1,49 @@
+As you were preparing an enormous number of water balloons for a summer event, a tornado swept you up and deposited you into a walled city in the Land of Oz. It seems that before her untimely demise, the Wicked Witch of the West had produced scores of clones. It was a failed experiment, though, since all that these witch clones do is wander randomly about. Unfortunately, anyone they happen to stumble into dies, and now you're the only person in town. Fortunately, you have your water balloons, and you learned from a documentary what happens to wet witches.
+
+Well, that's the scenario for a new video game under development. Your assignment is to complete the prototype that uses character-based graphics.
+
+If you execute this Windows program or this Mac program or this Linux program, you will see the player (indicated by @) in a rectangular city filled with witches (usually indicated by W). At each turn, the user will select an action for the player to take. The player will take the action, and then each witch will move one step in a random direction. If a witch lands on the position occupied by the player, the player dies.
+
+This smaller Windows version or Mac version or Linux version of the game may help you see the operation of the game more clearly.
+
+At each turn the player may take one of these actions:
+
+Move one step up, down, left, or right. If the player attempts to move into the wall of the city (e.g., down, when on the bottom row), the player does not move. It is allowable for the player to move to a position currently occupied by a witch. If no witch occupies that position after the witches have moved, the player survived the turn.
+Toss a water balloon in one of the four directions up, down, left, or right. If there is at least one witch at any distance in that direction, the nearest one in that direction is the candidate victim. If more than one witch is nearest (i.e., they occupy the same position), only one witch at that position is the candidate victim. With 1/3 probability, the balloon bursts and douses the candidate, who melts; with 2/3 probability, the toss is ineffective and no witch is melted. Since a melted witch poses no further threat to the player, it is removed from the game.
+Stand. In this case, the player does not move or toss a balloon.
+The game allows the user to select the player's action: u/d/l/r for movement, tu/td/tl/tr for tossing a balloon, and just hitting enter for standing. The user may also type q to prematurely quit the game.
+
+When it's the witches' turn, each witch picks a random direction (up, down, left, or right) with equal probability. The witch moves one step in that direction if it can; if the witch attempts to move into the wall of the city, however, (e.g., down, when on the bottom row), it does not move. More than one witch may occupy the same position; in that case, instead of W, the display will show a digit character indicating the number of witches at that position (where 9 indicates 9 or more). If after the witches move, a witch occupies the same position as the player, the player dies.
+
+Your assignment is to complete this C++ program skeleton to produce a program that implements the described behavior. (We've indicated where you have work to do by comments containing the text TODO; remove those comments as you finish each thing you have to do.) The program skeleton you are to flesh out defines four classes that represent the four kinds of objects this program works with: Game, City, Witch, and Player. Details of the interface to these classes are in the program skeleton, but here are the essential responsibilities of each class:
+
+Game
+
+To create a Game, you specify a number of rows and columns and the number of witches to start with. The Game object creates an appropriately sized City and populates it with a Player and the Witches.
+A game may be played. (Notice that the city is displayed after the witches have had their turn to move, but not after the player has had its turn.)
+City
+
+When a City object of a particular size is created, it has no witches or player. In the City coordinate system, row 1, column 1 is the upper-left-most position that can be occupied by a Witch or Player. (If a City were created with 10 rows and 20 columns, then the lower-right-most position that could be occupied would be row 10, column 20.)
+You may tell a City object to create or melt a Witch at a particular position.
+You may tell a City object to create a Player at a particular position.
+You may tell a City object to have all the witches in it make their move.
+You may ask a City object its size, how many witches are at a particular position, and how many witches altogether are in the City.
+You may ask a City object for access to its player.
+A City object may be displayed on the screen, showing the locations of the witches and the player, along with other status information.
+Player
+
+A Player is created at some position (using the City coordinate system, where row 1, column 1 is the upper-left-most position, etc.).
+You may tell a Player to move in a direction, or toss a balloon in a direction, or stand. (The player has an unlimited number of water balloons, so always has a balloon to toss.)
+You may tell a Player it has died.
+You may ask a Player for its position, alive/dead status, and age. (The age is the count of how many turns the player has survived.)
+Witch
+
+A Witch is created at some position (using the City coordinate system, where row 1, column 1 is the upper-left-most position, etc.).
+You may tell a Witch to move.
+You may ask a Witch object for its position.
+The skeleton program you are to complete has all of the class definitions and implementations in one source file, which is awkward. Since we haven't yet learned about separate compilation, we'll have to live with it.
+
+Complete the implementation in accordance with the description of the game. You are allowed to make whatever changes you want to the private parts of the classes: You may add or remove private data members or private member functions, or change their types. You must not make any deletions, additions, or changes to the public interface of any of these classes — we're depending on them staying the same so that we can test your programs. You can and will, of course, make changes to the implementations of public member functions, since the callers of the function wouldn't have to change any of the code they write to call the function. You must not declare any public data members, nor use any global variables whose values may change during execution (so global constants are OK). You may add additional functions that are not members of any class. The word friend must not appear in your program.
+
+Any member functions you implement must never put an object into an invalid state, one that will cause a problem later on. (For example, bad things could come from placing a witch outside the city.) Any function that has a reasonable way of indicating failure through its return value should do so. Constructors pose a special difficulty because they can't return a value. If a constructor can't do its job, we have it write an error message and exit the program with failure by calling exit(1);. (We haven't learned about throwing an exception to signal constructor failure.)
+
