@@ -1,0 +1,77 @@
+Before you ask a question about this specification, see if it has already been addressed in the spec or in the Project 2 FAQ. And read the FAQ before you turn in this project, to be sure you didn't misinterpret anything.
+
+(Be sure you also do the homework accompanying this project.)
+
+You are a software developer for the Lost Angels County Department of Transportation. Bus riders in the county may purchase fare tickets. You have been assigned to write a program that prints these tickets.
+
+Your program must accept as input the rider's destination, the number of zone boundaries crossed, the rider's age, and whether or not the rider is a student. The output will repeat the destination and tell the fare.
+
+Here is an example of a dialog with the program (user input is shown here in boldface):
+
+	Age of rider: 21
+	Student? (y/n): n
+	Destination: Bay City
+	Number of zone boundaries crossed: 2
+	---
+	The fare to Bay City is $2.55
+The fare is $1.45 plus $0.55 per zone boundary crossed, unless a discount applies:
+
+Riders under 18 get a break for short trips: For trips crossing 0 or 1 zone boundaries, the fare is $0.65
+For trips crossing 0 or 1 zone boundaries, students 18 or over get the same break as riders under 18.
+The senior fare for riders 65 and over is $0.55 plus $0.35 per zone boundary crossed. However, for a trip crossing 0 boundaries, the senior fare is only $0.45. Seniors who believe in lifelong learning (i.e., are students) are no dummies: They pay the cheapest fare available to them.
+Here's another example:
+
+	Age of rider: 22
+	Student? (y/n): y
+	Destination: Jollywood
+	Number of zone boundaries crossed: 1
+	---
+	The fare to Jollywood is $0.65
+For the examples above, if your program's behavior is not exactly as shown, it will probably fail most of our other test cases as well.
+
+You can test your understanding of the fare schedule by experimenting with the fare calculator we found at the Lost Angels County Department of Transportation website.
+
+Your program must collect the information for one transaction in the manner indicated by the examples, and then write to cout a line with three hyphens only (no spaces or other characters), followed by exactly one line in a format required below. Our grading tool will judge the correctness of your program by examining only the line following the line with three hyphens (and verifying that there are no additional lines). That one line you write must be in one of the following five forms; the text must be identical to what is shown, except that italicized items are replaced as appropriate:
+
+If the rider's age is negative:
+   The age must not be negative
+If the student status is not y or n (must be lower case):
+   You must enter y or n
+If nothing was provided for the destination:
+   You must enter a destination
+If the number of zone boundaries crossed is negative:
+   The number of zone boundaries crossed must not be negative
+If the input is valid and none of the preceding situations holds:
+   The fare to destination is $amount
+In the last case, destination must be the destination the user entered, and amount must be the correct answer, shown as a nonnegative number with at least one digit to the left and exactly two digits to the right of the decimal point. The lines you write must not start with any spaces. If you are not a good speller or typist, or if English is not your first language, be especially careful about duplicating the messages exactly. Here are some foolish mistakes that may cause you to get very few points for correctness on this project, no matter how much time you put into it, because the mistake will cause your program to fail most or all of the test cases we run:
+
+Not writing to cout a line with exactly three hyphens in all cases.
+Writing any spaces or any other text on the line that is supposed to have three hyphens.
+Writing more than one line after the line with three hyphens. Don't, for example, add a gratuitous "Thank you for riding a Lost Angels County bus."
+Writing lines to cerr instead of cout.
+Writing lines like these:
+	The fair to Redundant Beach is $1.25   misspelling
+	The Fare to Redundant Beach is $1.25   wrong capitalization
+	fare for Redundant Beach is $1.25      missing text
+	The fare for Redundant Beach is $1.25  wrong text
+	The fare to Redundant Beach is $ 1.25  extra space
+	The fare to Redundant Beach is 1.25    missing dollar sign
+	The fare to Redundant Beach is $1.25.  extra period
+	The fare to Redundant Beach is $1.250  extra digit
+	The fare to Unseeno is $2              missing decimal point and digits
+Your program must gather the age, the student status, the destination type, and the number of zone boundaries crossed in that order. However, if you detect an error in an item, you do not have to request or get the remaining items if you don't want to; just be sure you write to cout the line of three hyphens, the required message and nothing more after that. If instead you choose to gather all input first before checking for any errors, and you detect more than one error, then after writing the line of three hyphens, write only the error message for the earliest erroneous item.
+
+You will not write any loops in this program. This means that each time you run the program, it handles only one bus ticket transaction. It also means that in the case of bad input, you must not keep prompting the user until you get something acceptable; our grading tool will not recognize that you're doing that.
+
+A string with no characters in it is the empty string. A string with at least one character in it is not the empty string, even if the only characters in it are things like spaces or tabs. Although realistically it would be silly to have a destination name consisting of seventeen spaces and nothing more, treat that as you would any other non-empty string: as a valid name. (Since you don't yet know how to check for that kind of situation anyway, we're not requiring you to.)
+
+The one kind of input error that your program does not have to deal with, because you don't yet know how to do so, is not finding an integer in the input where an integer is expected. Our grading tool will not, for example, supply the text Granola Hills or the number 23.456 when your program requests a rider's age.
+
+The correctness of your program must not depend on undefined program behavior. Your program could not, for example, assume anything about n's value at the point indicated:
+
+	int main()
+	{
+	    int n;
+	    int m = 42 * n;  // n's value is undefined
+	    …
+Your program must build successfully under both g31 and either Visual C++ or clang++.
